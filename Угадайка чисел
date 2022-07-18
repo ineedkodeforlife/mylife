@@ -1,0 +1,14 @@
+#Угадайка чисел
+import random
+a,b=0,random.randint(1,100)
+while a==0:
+    c=int(input())
+    if(c>b):
+        print("Число",c,"- слишком большое, попробуйте еще раз!")
+        continue
+    elif(c<b):
+        print("Число",c,"- слишком маленькое, попробуйте еще раз!")
+        continue
+    else:
+        print("Поздравляю",c,"- это и есть загаданное число!")
+        break
