@@ -1,0 +1,40 @@
+import random
+digits,low_lat,up_lat,punctuation,chars="0123456789","abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ","!#$%&*+-=?@^_",""
+print("Приветствую вас в генераторе безопасных паролей ")
+print("Сколько поролей вам нужно ?")
+def proverka(c):
+    while c.isdigit() == False or int(c)<=0:
+        print("Пожалуйста , введите число,больше 0")
+        c = input()
+    return int(c)
+def generate_password(length,chars):
+    password=""
+    for i in range(length):
+        password+=random.choice(chars)
+    return password
+c=input()
+c=proverka(c)
+for i in range(c):
+    print("Введите длину",i+1,"пароля ")
+    length=input()
+    length=proverka(length)
+    print("Ответ 1 - да , 0 - нет")
+    print("Включать  цифры ?")
+    if(input()=="1"):
+        chars+=digits
+    print("Включать  заглавные буквы ?")
+    if (input() == "1"):
+        chars+=up_lat
+    print("Включать строчные буквы ?")
+    if (input() == "1"):
+        chars+=low_lat
+    print("Включать символы '!#$%&*+-=?@^_' ?")
+    if (input() == "1"):
+        chars+=punctuation
+    print("Исключать неоднозначные символы 'il1Lo0O' ? ")
+    if (input() == "1"):
+        for j in chars:
+            if(j in 'il1Lo0O'):
+                chars=chars.replace(j,"")
+    password = generate_password(length, chars)
+    print(i+1,"пароль - ",password)
