@@ -1,0 +1,118 @@
+print("Вам нужно зашифровать - 1 или расшифровать сообщение - 0")
+sdvih=0
+opr=input()
+print("Введите  сообщение ")
+text,k=input(),[]
+print()
+def Cesar(start,end,rasst,symbol):
+    while(rasst > end -start):
+        rasst=rasst-(end-start)
+    if (ord(symbol) + rasst > end):
+         return chr(start + rasst - (end+1 - ord(symbol)))
+    elif(ord(symbol)+rasst<start):
+        return chr(end+1 - (abs(rasst) - (ord(symbol) - start)))
+    else:
+        return chr(ord(symbol)+rasst)
+def de_Cesar(start,end,rasst,symbol):
+    if (ord(symbol) - rasst > end):
+        return chr(start - rasst - (end+1 - ord(symbol)))
+    elif(ord(symbol) - rasst<start):
+        return chr(end+1 - (abs(rasst) - (ord(symbol) - start)))
+    else:
+        return chr(ord(symbol)-rasst)
+if(opr =="1"):
+    print("Хотите ли вы зашифровать каждое слово так , чтобы его сдвиг был равен его длине ? 1- да 0 - нет")
+    sdvih=input()
+if(sdvih!="1"):
+    print("Известен ли сдвиг ? 1- да 0 -нет")
+    sdvig=input()
+    if(sdvig=="1"):
+        print("Введите сдвиг")
+        a=int(input())
+    else:
+        print("Какой язык надо расшивровать ? 1 -Русский 0 - Английский")
+        language=input()
+while True:
+    if(sdvih=="1"):
+        p,c= [],0
+        text1 = text + "."
+        for j in range(len(text1)):
+            if (97 <= ord(text1[j]) <= 122 or 65 <= ord(text1[j]) <= 90):
+                c += 1
+            else:
+                if (int(c) != 0):
+                    p.append(c)
+                    c = 0
+        text = text.split()
+        for i in text:
+            for j in i:
+                if (97 <= ord(j) <= 122):
+                    k.append(Cesar(97, 122, int(p[c]), j))
+                elif (65 <= ord(j) <= 90):
+                    k.append(Cesar(65, 90, int(p[c]), j))
+                else:
+                    k.append(j)
+            k.append(" ")
+            c += 1
+    if(sdvig=="1" and sdvih != "1"):
+        for i in range(len(text)):
+            if(opr=="1"):
+                if(97<=ord(text[i])<=122):
+                    k.append(Cesar(97,122,a,text[i]))
+                elif(65<=ord(text[i])<=90):
+                    k.append(Cesar(65,90,a,text[i]))
+                elif(1072<=ord(text[i])<=1103):
+                    k.append(Cesar(1072,1103,a,text[i]))
+                elif(1040<=ord(text[i])<=1071):
+                    k.append(Cesar(1040,1071,a,text[i]))
+                else:
+                    k.append(text[i])
+            else:
+                if (97 <= ord(text[i]) <= 122):
+                    k.append(de_Cesar(97, 122, a, text[i]))
+                elif (65 <= ord(text[i]) <= 90):
+                    k.append(de_Cesar(65, 90, a, text[i]))
+                elif (1072 <= ord(text[i]) <= 1103):
+                    k.append(de_Cesar(1072, 1103, a, text[i]))
+                elif (1040 <= ord(text[i]) <= 1071):
+                    k.append(de_Cesar(1040, 1071, a, text[i]))
+                else:
+                    k.append(text[i])
+    elif(sdvih!="1"):
+        if (language == "1"):
+            for j in range(32):
+                for i in range(len(text)):
+                    if (1072 <= ord(text[i]) <= 1103):
+                        print(de_Cesar(1072, 1103, j, text[i]), end="")
+                    elif (1040 <= ord(text[i]) <= 1071):
+                        print(de_Cesar(1040, 1071, j, text[i]), end="")
+                    else:
+                        print(text[i], end="")
+                print()
+        else:
+            for j in range(25):
+                for i in range(len(text)):
+                    if (97 <= ord(text[i]) <= 122):
+                        print(de_Cesar(97, 122, j, text[i]), end="")
+                    elif (65 <= ord(text[i]) <= 90):
+                        print(de_Cesar(65, 90, j, text[i]), end="")
+                    else:
+                        print(text[i], end="")
+                print()
+    if(len(k)>=1):
+        print("Зашифрованное сообщение", text, " :")
+        print(*k, sep="")
+    print()
+    print("Хотите ли вы расшифровать или зашифровать еще одно сообщение 1 - да , 0 - нет")
+    if(input()=="1"):
+        print("Хотите ли вы зашифровать каждое слово так , чтобы его сдвиг был равен его длине ? 1- да 0 - нет")
+        sdvih = input()
+        print("Вам нужно зашифровать - 1 или расшифровать сообщение - 0")
+        opr = input()
+        print("Введите  сообщение ")
+        text,k = input(),[]
+        print("Введите сдвиг")
+        a = int(input())
+    else:
+        break
+print("Спасибо за использование программы , приходите еще!")
